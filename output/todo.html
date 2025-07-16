@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <style>
+        .completed {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+    <form id='todoForm'>
+        <input type='text' id='todoInput' placeholder='Add a task' required>
+        <button type='submit'>Add</button>
+    </form>
+    <ul id='todoList'></ul>
+    <script>
+        const form = document.getElementById('todoForm');
+        const input = document.getElementById('todoInput');
+        const list = document.getElementById('todoList');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            addTask(input.value);
+            input.value = '';
+        });
+        function addTask(task) {
+            const li = document.createElement('li');
+            li.innerText = task;
+            li.addEventListener('click', function() {
+                li.classList.toggle('completed');
+            });
+            const deleteBtn = document.createElement('button');
+            deleteBtn.innerText = 'Delete';
+            deleteBtn.addEventListener('click', function () {
+                list.removeChild(li);
+            });
+            li.appendChild(deleteBtn);
+            list.appendChild(li);
+        }
+    </script>
+</body>
+</html>
